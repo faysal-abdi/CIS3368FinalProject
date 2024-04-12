@@ -6,12 +6,6 @@ from database import connection
 app = Flask(__name__)
 api = Api(app)
 
-# Dummy data for testing
-facilities = []
-classrooms = []
-teachers = []
-children = []
-
 # Login API
 @app.route('/login', methods=['POST'])
 def login():
