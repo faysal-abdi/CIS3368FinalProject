@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teachers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Teachers</h1>
+        <form method="POST" action="/teachers">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Teacher</button>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% teachers.forEach(function(teacher) { %>
+                <tr>
+                    <td><%= teacher.id %></td>
+                    <td><%= teacher.name %></td>
+                    <td><%= teacher.subject %></td>
+                    <td>
+                        <form method="POST" action="/teachers/<%= teacher.id %>?_method=PUT">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" value="<%= teacher.name %>" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="subject" value="<%= teacher.subject %>" required>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                        </form>
+                        <form method="POST" action="/teachers/<%= teacher.id %>?_method=DELETE">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
